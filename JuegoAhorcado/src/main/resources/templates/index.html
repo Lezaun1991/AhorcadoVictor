@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Página Inicio</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<nav th:replace="~{fragmentos/barrasup::barra-superior}"></nav>
+<main>
+    <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <h1>Bienvenido Al Ahorcado</h1>
+            <p class="col-md-8 fs-4">Una aplicación de ejemplo de Spring MVC con Thymeleaf.</p>
+            <h1 sec:authorize="!isAuthenticated()" class="display-4">Muy buenas, visitante, si no esta registrado
+                hagalo mas abajo</h1>
+            <h1 sec:authorize="isAuthenticated()" class="display-4">Muy buenas, <span sec:authentication="name">, listo para jugar</span></h1>
+            <p class="text-center">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-lg btn-success" th:href="@{/juego/prueba}">Modo Admin</a>
+                <a sec:authorize="hasRole('ROLE_USER')" class="btn btn-lg btn-success" th:href="@{/juego/prueba}">Jugar</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-lg btn-success" th:href="@{/login}">Registrarse</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

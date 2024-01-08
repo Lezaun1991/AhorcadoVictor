@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Palabra</title>
+  <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link rel="stylesheet" href="/css/ahorcado.css">
+</head>
+
+<body>
+<div class="container mt-5">
+  <h1 class="text-center">CREAR PALABRA</h1>
+  <div class="form-container" >
+  <form method="post" action="#" th:action="@{/añadir/palabra/submit}" th:object="${palabra}"
+        class="mt-4">
+    <div class="mb-3">
+      <label for="palabra" class="form-label">PALABRA</label>
+      <input type="text" id="palabra" class="form-control" placeholder="PALABRA" th:field="*{nombre}">
+      <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+            class="help-block" id="nombre-error">Errores</span>
+    </div>
+    <div class="mb-3">
+      <label for="pista" class="form-label">PISTA</label>
+      <input type="text" id="pista" class="form-control" placeholder="PISTA" th:field="*{pista}">
+      <span th:if="${#fields.hasErrors('pista')}" th:errors="*{pista}"
+            class="help-block" id="pista-error">Errores</span>
+    </div>
+    <div class="text-center">
+    <button type="submit" class="btn btn-primary text-center">Enviar</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

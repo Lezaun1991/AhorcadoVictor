@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Mostrar Palabra</title>
+    <link rel="stylesheet" href="/css/ahorcado.css">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<nav th:replace="~{fragmentos/barrasup::barra-superior}"></nav>
+<div id="contenedor">
+    <h1>PALABRA A RESOLVER:</h1>
+    <h2>PISTA</h2>
+        <p th:text="${nuevaPista}"></p>
+        <p th:text="${palabraEnmascarada}"></p>
+<!-- Verifica la condición y muestra el botón si es verdadera -->
+
+        <th:block th:if="${mostrarBoton}">
+            <a th:href="@{/juego/prueba}"><button class="botonDerrota">Volver a jugar</button></a>
+        </th:block>
+        <script th:inline="javascript">
+            let intentos = /*[[${session['intentos']}]]*/ 0;
+        </script>
+    <h2>Seleccionar Letra</h2>
+        <img th:src="${urlImagen}" alt="ahorcado inicial">
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <p>LA PALABRA ES: <span th:text="${palabraOriginal}" ></span></p>
+    </th:block>
+</div>
+<hr>
+<div>
+    <p>LETRAS ACERTADAS:
+        <span th:each="letra : ${listaLetrasAcertadas}" th:text="${letra}" style="margin-right: 5px;"></span>
+    </p>
+</div>
+<div>
+    <p>LETRAS FALLADAS:
+        <span th:each="letra : ${listaLetrasFalladas}" th:text="${letra}" style="margin-right: 5px;"></span>
+    </p>
+</div>
+<div>
+    <p>PALABRAS ACERTADAS:
+        <span th:text="${palabrasAcertadas}" style="margin-right: 5px;"></span>
+    </p>
+</div>
+
+
+<div class="letras-container">
+    <div th:each="letra : ${Abecedario}">
+         <form th:action="@{/revelarLetra}" method="post">
+            <input type="hidden" th:name="letra" th:value="${letra}" />
+            <button type="submit" th:text="${letra}"></button>
+        </form>
+    </div>
+</div>
+<hr>
+<div id="botonJavaScript"></div>
+<script src="/js/juego.js"></script>
+</body>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</html>

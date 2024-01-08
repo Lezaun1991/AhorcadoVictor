@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head >
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <title>Login</title>
+</head>
+
+<body>
+<nav th:replace="~{fragmentos/barrasup::barra-superior}"></nav>
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1>Buena suerte</h1>
+    </div>
+
+    <div class="mt-5">
+        <h3 class="text-center">Elige Modo De Juego</h3>
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-primary me-3"><a th:href="@{/elegir/facil}" class="text-white text-decoration-none">AL AZAR</a></button>
+            <button class="btn btn-success"><a th:href="@{/añadir/palabra}" class="text-white text-decoration-none">CREA LA PALABRA</a></button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
